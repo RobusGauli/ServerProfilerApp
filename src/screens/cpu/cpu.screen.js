@@ -9,11 +9,19 @@ import {
     Header,
     MenuItem
 } from '../components'
+import Svg, {
+    Path,
+    Polyline
+} from 'react-native-svg'
 
 export class CPU extends React.Component {
 
     constructor() {
         super()
+        this.cu = 0
+        this.cpuc = null
+        this.cpuinterrupts = null
+        
         this.state = {
             error: false,
             connected: false,
@@ -35,23 +43,7 @@ export class CPU extends React.Component {
     }
 
 
-    renderCpuUsagePerCore = () => {
-        if (Object.keys(this.state.data).length === 0) {
-            return null
-
-        }
-
-        return this.state.data.c_utilization_per_core.map((item, index) => {
-            return (
-                <MenuItem
-                    title={`Core ${index + 1}`}
-                    value={item}
-                    key={index}
-                    percent
-                />
-            )
-        })
-    }
+   
 
     renderCpuInterrupts = () => {
         if (Object.keys(this.state.data).length === 0) {
@@ -80,14 +72,33 @@ export class CPU extends React.Component {
     }
 
     render() {
-        let cu = 0
+        
         
         if(this.props.screenProps.data !== null) {
             //cu = this.props.screenProps.data[this.aliasName].cpu.cu
-            let data = JSON.parse(this.props.screenProps.data)
+            let data = this.props.screenProps.data
             
             if (data.id === this.aliasName) {
-                console.log(data.payload, data.id)
+                this.cu = data.payload.cpu.cu
+                
+                this.cpuc = data.payload.cpu.cupc.map((item, index) => {
+                    return (
+                        <MenuItem title={`Core ${index + 1}`}
+                            value={item}
+                            key={index}
+                            percent
+                        />
+                    )
+                })
+
+                this.cpuInts = data.payload.cpu.ci
+                this.ctxSwitch = data.payload.cpu.cs
+                this.sysCalls = data.payload.cpu.sc
+
+                
+                
+                
+                
             }
             
         
@@ -103,17 +114,35 @@ export class CPU extends React.Component {
                 
                 <ScrollView>
                     <MenuItem title={'CPU USAGE'}
-                        value={cu}
+                        value={this.cu}
                         percent
                         main
                         heading
                         colored 
                         
                     />
-                    {this.renderCpuUsagePerCore()}
-                    {this.renderCpuInterrupts()}
+                    {this.cpuc}
+                    <View>
+                        <MenuItem title={'CPU INTS'}
+                                value={this.cpuInts}
+                                main
+                                heading
+                        />
+                        <MenuItem title={'CTX SWITCH'}
+                                value={this.ctxSwitch}
+                                heading
+                                main
+                            />
+                        <MenuItem title={'SYS CALLS'}
+                            value={this.sysCalls}
+                            heading
+                            main
+                        />
+                    </View>
+                    
+                    
                 </ScrollView>
-
+                
             </View>
         )
     }

@@ -5,7 +5,8 @@ import {
   import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    LayoutAnimation
   } from 'react-native'
   import { TabNavigator, StackNavigator } from 'react-navigation'
   import { CPU } from './screens/cpu'
@@ -73,7 +74,7 @@ class Root extends React.Component {
       fetched: false  
     }
 
-    this.ws = new WebSocket('ws://192.168.0.100:9000/')
+    this.ws = new WebSocket('ws://192.168.0.104:9000/')
     
     
 
@@ -95,9 +96,9 @@ class Root extends React.Component {
   }
 
   fetchFromSocket = () => {
-   
+    
     this.ws.onmessage = e => {
-      
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
       this.setState({
         data: e.data,
         fetched: true
@@ -110,7 +111,7 @@ class Root extends React.Component {
     return (
       <View style={styles.container}>
         
-        <Profiler screenProps={{data: this.state.data, aliasName: this.aliasName}} />
+        <Profiler screenProps={{data: JSON.parse(this.state.data), aliasName: this.aliasName}} />
       </View>
 
     )

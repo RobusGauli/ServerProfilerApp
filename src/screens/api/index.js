@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.0.100:8000'
+const BASE_URL = 'http://192.168.0.104:8000'
 
 export const nodes = () => {
     return new Promise((resolve, reject) => {

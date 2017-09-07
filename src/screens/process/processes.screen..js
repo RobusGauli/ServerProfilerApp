@@ -15,6 +15,8 @@ export class Processes extends React.Component {
 
     constructor() {
         super()
+
+        this.processViews = null
         this.state = {
             error: false,
             connected: false,
@@ -28,7 +30,16 @@ export class Processes extends React.Component {
         
     }
 
-    
+    onPress = (aliasName, pid) => {
+        alert(pid)
+    }
+
+    componentWillMount = () => {
+        const { screenProps } = this.props
+        this.aliasName = screenProps.aliasName
+        
+        
+    }
 
     componentDidMount = () => {
         //this.fetchFromSocket()
@@ -45,20 +56,33 @@ export class Processes extends React.Component {
    
 
     render() {
-        
-        let views = this.state.data.map((item, index) => {
-            return (
-                <ProcessItem name={item.name}
-                    key={index}
-                    pid={item.pid}
-                    status={item.status}
-                    cpuPercent={item.cpu_percent}
-                    memoryPercent={item.memory_percent}
-                    userName={item.username}
 
-                />
-            )
-        })
+        if(this.props.screenProps.data !== null) {
+            //cu = this.props.screenProps.data[this.aliasName].cpu.cu
+            let data = this.props.screenProps.data
+            
+            if (data.id === this.aliasName) {
+                this.processViews = data.payload.processes.map((item, index) => {
+                    return (
+                        <ProcessItem name={item.name}
+                        key={index}
+                        pid={item.pid}
+                        status={item.status}
+                        cpuPercent={item.cpu_percent}
+                        memoryPercent={item.memory_percent}
+                        userName={item.username}
+                        onPress={() => this.onPress(this.aliasName, item.pid)}
+    
+                    />
+                    )
+                })
+                
+            }
+            
+        
+        }
+        
+       
         return (
             <View style={styles.container}>
                 <Header leftData={''}
@@ -68,7 +92,7 @@ export class Processes extends React.Component {
                 
                 <ScrollView>
                     
-                    {views}
+                    {this.processViews}
                 </ScrollView>
 
             </View>

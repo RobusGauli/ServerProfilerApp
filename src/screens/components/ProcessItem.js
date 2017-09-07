@@ -2,14 +2,15 @@ import React from 'react'
 import {
     Text,
     View,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity
 } from 'react-native'
 
 export const ProcessItem = props => {
     let opacity = 0.09
     
     return (
-        <View style={{
+        <TouchableOpacity style={{
             backgroundColor: `rgba(255, 255, 255, ${opacity})`,
             height: props.main? 60: 70,
             flexDirection: 'row',
@@ -19,7 +20,9 @@ export const ProcessItem = props => {
             paddingLeft: 20,
             borderBottomWidth: 0.3,
             borderColor: 'rgba(255, 255, 255, 0.6)'
-          }}>
+          }}
+          onPress={props.onPress} 
+        >
             <View style={{
                 flexDirection: 'column'
             }}>
@@ -100,7 +103,7 @@ export const ProcessItem = props => {
                 {props.cpuPercent}
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
     )
 }
 
@@ -113,7 +116,8 @@ const defaultProps = {
     name: 'process nae',
     status: 'running',
     memoryPercent: '40%',
-    cpuPercent: '50%'
+    cpuPercent: '50%',
+    onPress: () => null
   }
 ProcessItem.defaultProps = defaultProps
   

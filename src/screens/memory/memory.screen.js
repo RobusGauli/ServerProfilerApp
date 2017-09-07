@@ -14,28 +14,41 @@ export class Memory extends React.Component {
 
     constructor() {
         super()
-        this.state = {
-            error: false,
-            connected: false,
-            data: {},
-            
-        }
+        this.total = 0
+        this.available = 0
+        this.usePercentage = 0
+        this.health = 'Good'
 
         
     }
 
+    componentWillMount = () => {
+        const { screenProps } = this.props
+        this.aliasName = screenProps.aliasName
+    }
     componentDidMount = () => {
-        this.fetchFromSocket()
+        
     }
 
-    fetchFromSocket = () => {
-       
-        //alert(this.cpuMeta.CLOSED)
-    }
+    
 
    
 
     render() {
+        if(this.props.screenProps.data !== null) {
+            //cu = this.props.screenProps.data[this.aliasName].cpu.cu
+            let data = this.props.screenProps.data
+            
+            if (data.id === this.aliasName) {
+                this.total = data.payload.memory.t
+                this.available = data.payload.memory.a
+                this.usePercentage = data.payload.memory.p
+                
+            }
+            
+        
+        }
+        
         return (
             <View style={styles.container}>
                 <Header leftData={''}
@@ -45,7 +58,7 @@ export class Memory extends React.Component {
                 
                 <ScrollView>
                     <MenuItem title={'TOTAL '}
-                        value={this.state.data.total}
+                        value={this.total}
                         
                         main
                         heading
@@ -53,7 +66,7 @@ export class Memory extends React.Component {
                         
                     />
                     <MenuItem title={'AVAILABLE '}
-                        value={this.state.data.available}
+                        value={this.available}
                         
                         main
                         heading
@@ -61,13 +74,13 @@ export class Memory extends React.Component {
                         
                     />
                     <MenuItem title={'% USAGE'}
-                        value={this.state.data.use_percentage}
+                        value={this.usePercentage}
                         main
                         heading
                         
                     />
                     <MenuItem title={'HEALTH'}
-                        value={this.state.data.health}
+                        value={this.health}
                     />
                 </ScrollView>
 
