@@ -13,6 +13,7 @@ import {
   import { Memory } from './screens/memory'
   import { Processes } from './screens/process'
   import { Menu } from './screens/menu'
+  import { Network } from './screens/network'
   
   
   const options = {
@@ -59,11 +60,22 @@ import {
         navigationOptions: {
           header: null
         }
+      },
+      Network: {
+        screen: Network,
+        navigationOptions: {
+          header: null
+        }
       }
     }, options
   )
 
 class Root extends React.Component {
+  options = {
+    headers: {
+      mode: 'receiver'
+    }
+  }
   constructor() {
     super()
     this.state = {
@@ -74,10 +86,10 @@ class Root extends React.Component {
       fetched: false  
     }
 
-    this.ws = new WebSocket('ws://192.168.0.104:9000/')
+    this.ws = new WebSocket('ws://0.0.0.0:5000/', head= null, options=Root.options)
     
     
-
+    console.log(this.ws)
 
 
   }
@@ -104,6 +116,7 @@ class Root extends React.Component {
         fetched: true
 
       })
+      console.log(e.data)
     }
   }
 

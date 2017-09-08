@@ -67,7 +67,6 @@ export class Menu extends React.Component {
         .catch(e => {
             this.setState({
                 loading: false,
-                data: null,
                 error: true,
                 refreshing: false
             })
@@ -82,7 +81,7 @@ export class Menu extends React.Component {
         let menuView = Object.keys(this.state.data).map((item, index) => {
             return (
                 <MItem title={item}
-                    platform={this.state.data[item].platform}
+                    platform={this.state.data[item].payload.platform}
                     cpu={this.state.data[item].payload.cpu.cu}
                     memory={this.state.data[item].payload.memory.p}
                     key={index}

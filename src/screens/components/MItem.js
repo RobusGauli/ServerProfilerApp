@@ -62,7 +62,7 @@ export const MItem = props => {
               {props.platform}
             </Text>
           </View>
-          <Icon name={'ios-speedometer-outline'} size={30} color={'rgba(255,255, 255, 0.8)'} style={{marginRight: 20}}/>
+          <Icon name={'ios-speedometer-outline'} size={10} color={'rgba(255,255, 255, 0.8)'} style={{marginRight: 20}}/>
         </View>
         
         <View style={{

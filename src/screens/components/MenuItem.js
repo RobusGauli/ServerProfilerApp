@@ -8,7 +8,7 @@ import {
 
 export const MenuItem = props => {
     let value = props.percent ? props.value + '%' : props.value
-    let opacity = props.main ? 0.2 : 0.04
+    let opacity = props.main ? 0.06 : 0.04
     return (
       <View style={{
         backgroundColor: `rgba(255, 255, 255, ${opacity})`,
