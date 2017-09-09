@@ -86,7 +86,7 @@ class Root extends React.Component {
       fetched: false  
     }
 
-    this.ws = new WebSocket('ws://0.0.0.0:5000/', head= null, options=Root.options)
+    this.ws = new WebSocket('ws://10.20.30.39:5000/', head= null, options=Root.options)
     
     
     console.log(this.ws)
