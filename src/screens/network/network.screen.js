@@ -53,7 +53,7 @@ export class Network extends React.Component {
             //cu = this.props.screenProps.data[this.aliasName].cpu.cu
             let data = this.props.screenProps.data
             
-            if (data.id === this.aliasName) {
+           
                
                 this.byteReceived = data.payload.network.br
                 this.byteSent = data.payload.network.bs
@@ -63,8 +63,8 @@ export class Network extends React.Component {
                 
                 
                 
-                
-            }
+             
+            
             
         
         }

@@ -39,12 +39,12 @@ export class Memory extends React.Component {
             //cu = this.props.screenProps.data[this.aliasName].cpu.cu
             let data = this.props.screenProps.data
             
-            if (data.id === this.aliasName) {
+            
                 this.total = data.payload.memory.t
                 this.available = data.payload.memory.a
                 this.usePercentage = data.payload.memory.p
                 
-            }
+         
             
         
         }

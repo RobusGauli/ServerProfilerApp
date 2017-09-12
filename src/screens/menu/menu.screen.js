@@ -24,7 +24,7 @@ export class Menu extends React.Component {
         this.state = {
             error: false,
             connected: false,
-            data: {},
+            data: [],
             loading: false,
             refreshing: false
             
@@ -59,7 +59,7 @@ export class Menu extends React.Component {
         .then(json => {
             
             this.setState({
-                data: json,
+                data: json.nodes,
                 loading: false,
                 refreshing: false
             })
@@ -78,16 +78,13 @@ export class Menu extends React.Component {
    
 
     render() {
-        let menuView = Object.keys(this.state.data).map((item, index) => {
+        let menuView = this.state.data.map((item, index) => {
             return (
-                <MItem title={item}
-                    platform={this.state.data[item].payload.platform}
-                    cpu={this.state.data[item].payload.cpu.cu}
-                    memory={this.state.data[item].payload.memory.p}
+                <MItem title={item.name}
+                    platform={item.cpu}
                     key={index}
-                    br={this.state.data[item].payload.network.br}
-                    bs={this.state.data[item].payload.network.bs}
-                    onPress={() => this.onPress(item)}
+
+                    onPress={() => this.onPress(item.name)}
                 />
             )
         })

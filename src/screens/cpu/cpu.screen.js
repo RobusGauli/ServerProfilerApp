@@ -78,7 +78,7 @@ export class CPU extends React.Component {
             //cu = this.props.screenProps.data[this.aliasName].cpu.cu
             let data = this.props.screenProps.data
             
-            if (data.id === this.aliasName) {
+            
                 this.cu = data.payload.cpu.cu
                 
                 this.cpuc = data.payload.cpu.cupc.map((item, index) => {
@@ -99,7 +99,7 @@ export class CPU extends React.Component {
                 
                 
                 
-            }
+            
             
         
         }

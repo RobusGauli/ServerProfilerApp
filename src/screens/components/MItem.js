@@ -62,88 +62,10 @@ export const MItem = props => {
               {props.platform}
             </Text>
           </View>
-          <Icon name={'ios-speedometer-outline'} size={10} color={'rgba(255,255, 255, 0.8)'} style={{marginRight: 20}}/>
+          <Icon name={'ios-speedometer-outline'} size={30} color={'rgba(255,255, 255, 0.8)'} style={{marginRight: 20}}/>
         </View>
         
-        <View style={{
-          
-          
-          
-          borderRadius: 10,
-          marginBottom : 10,
-          
-          
-          
-          flexDirection: 'row',
-          justifyContent: 'space-around'
-          
-          
-          
-
-          
-          
-        }}>
-          <View style={{flexDirection: 'column', justifyContent: 'center'}}>
-            <Text style={{color: 'white', fontSize: 10}}>
-              {'CPU'}
-            </Text>
-            <Text style={{
-              fontSize: 11,
-              color: 'white',
-              fontWeight: 'bold'
-              
-            }}>
-              {props.cpu + '%'}
-            </Text>
-          </View>
-          <View style={{flexDirection: 'column', justifyContent: 'space-around'}}>
-          <Text style={{color: 'white', fontSize: 10}}>
-            {'Memory'}
-          </Text>
-          <Text style={{
-            fontSize: 11,
-            color: 'white',
-            fontWeight: 'bold',
-            
-          }}>
-            {props.memory + '%'}
-          </Text>
-        </View>
-        <View style={{flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'}}>
-            <Text style={{
-              color: 'white',
-              fontSize: 10,
-
-            }}>
-              {'Recv'}
-            </Text>
-            <Text style={{
-              fontSize: 11,
-              color: 'white',
-              fontWeight: 'bold'
-              
-            }}>
-              {props.br + 'MB'}
-            </Text>
-          </View>
-          <View style={{flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'}}>
-            <Text style={{
-              color: 'white',
-              fontSize: 10,
-
-            }}>
-              {'Sent'}
-            </Text>
-            <Text style={{
-              fontSize: 11,
-              color: 'white',
-              fontWeight: 'bold'
-              
-            }}>
-              {props.bs + 'MB'}
-            </Text>
-          </View>
-        </View>
+        
       </View>
       </TouchableHighlight>
     )

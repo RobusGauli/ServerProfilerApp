@@ -85,40 +85,51 @@ class Root extends React.Component {
       loading: false,
       fetched: false  
     }
-
-    this.ws = new WebSocket('ws://10.20.30.39:5000/', head= null, options=Root.options)
-    
-    
-    console.log(this.ws)
-
-
   }
+
+  
   componentWillMount = () => {
+    
     this.aliasName = this.props.navigation.state.params.aliasName
+    
   }
-  componentDidMount = () => {
-    this.fetchFromSocket()
 
+  componentDidMount = () => {
+    this.ws = new WebSocket('ws://192.168.0.106:5000')
+    this.ws.onopen = this.onSocketOpen
+    this.ws.onmessage = this.onmessage
+
+    
    
     
   }
+
+  onSocketOpen = e => {
+   
+    setInterval(() => {
+      console.log('sending', this.ws)
+      this.ws.send(`{"destination" : "${this.aliasName}"}`)
+    }, 1000)
+  
+  }
+
+  onmessage = e => {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+    this.setState({
+      data: e.data,
+      fetched: true
+
+    })
+
+    console.log(e.data)
+  }
+
 
   componentWillUnmount = () => {
     this.ws.close()
   }
 
-  fetchFromSocket = () => {
-    
-    this.ws.onmessage = e => {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
-      this.setState({
-        data: e.data,
-        fetched: true
-
-      })
-      console.log(e.data)
-    }
-  }
+  
 
   render() {
     return (

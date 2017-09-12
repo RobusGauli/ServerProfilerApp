@@ -61,7 +61,7 @@ export class Processes extends React.Component {
             //cu = this.props.screenProps.data[this.aliasName].cpu.cu
             let data = this.props.screenProps.data
             
-            if (data.id === this.aliasName) {
+            
                 this.processViews = data.payload.processes.map((item, index) => {
                     return (
                         <ProcessItem name={item.name}
@@ -80,7 +80,7 @@ export class Processes extends React.Component {
             }
             
         
-        }
+        
         
        
         return (
