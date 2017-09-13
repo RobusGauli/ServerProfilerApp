@@ -14,7 +14,7 @@ import {
   import { Processes } from './screens/process'
   import { Menu } from './screens/menu'
   import { Network } from './screens/network'
-  
+  //thjis is my hanges
   
   const options = {
     tabBarOptions: {
