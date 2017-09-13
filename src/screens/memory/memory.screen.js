@@ -9,6 +9,16 @@ import {
     Header,
     MenuItem
 } from '../components'
+import {
+    VictoryChart,
+    VictoryZoomContainer,
+    VictoryScatter,
+    VictoryTheme,
+    VictoryStack,
+    VictoryArea,
+    VictoryAnimation
+} from 'victory-native'
+import _ from 'lodash'
 
 export class Memory extends React.Component {
 
@@ -18,6 +28,8 @@ export class Memory extends React.Component {
         this.available = 0
         this.usePercentage = 0
         this.health = 'Good'
+        
+        this.availables = []
 
         
     }
@@ -43,6 +55,7 @@ export class Memory extends React.Component {
                 this.total = data.payload.memory.t
                 this.available = data.payload.memory.a
                 this.usePercentage = data.payload.memory.p
+                this.availables.push(parseInt(this.available))
                 
          
             
@@ -55,7 +68,25 @@ export class Memory extends React.Component {
                     rightData={''}
                     mid={'Memory'}
                 />
-                
+
+                <VictoryChart
+                theme={VictoryTheme.material}
+                animate={{ duration: 1000 }}
+              >
+                <VictoryStack
+                  colorScale={"blue"}
+                >
+                  {this.availables.map((data, i) => {
+                    return (
+                      <VictoryArea
+                        key={i}
+                        data={[{x: i+ 1, y: 3}, {x: i + 2, y: 10}]}
+                        interpolation={"basis"}
+                      />
+                    );
+                  })}
+                </VictoryStack>
+              </VictoryChart>
                 <ScrollView>
                     <MenuItem title={'TOTAL '}
                         value={this.total}

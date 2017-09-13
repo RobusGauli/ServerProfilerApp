@@ -95,7 +95,7 @@ class Root extends React.Component {
   }
 
   componentDidMount = () => {
-    this.ws = new WebSocket('ws://192.168.0.104:5000')
+    this.ws = new WebSocket('ws://192.168.0.103:5000')
     this.ws.onopen = this.onSocketOpen
     this.ws.onmessage = this.onmessage
 
@@ -133,7 +133,7 @@ class Root extends React.Component {
 
   render() {
     return (
-      
+        
         
         <Profiler screenProps={{data: JSON.parse(this.state.data), aliasName: this.aliasName}} />
       
