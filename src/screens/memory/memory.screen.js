@@ -82,6 +82,7 @@ export class Memory extends React.Component {
                     <MenuItem title={'HEALTH'}
                         value={this.health}
                     />
+                   
                 </ScrollView>
 
             </View>

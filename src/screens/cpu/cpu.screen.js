@@ -14,8 +14,10 @@ import Svg, {
     Polyline
 } from 'react-native-svg'
 
-export class CPU extends React.Component {
+import { VictoryBar, VictoryPie, VictoryChart, VictoryLine, VictoryTheme } from 'victory-native'
 
+export class CPU extends React.Component {
+    
     constructor() {
         super()
         this.cu = 0
@@ -26,16 +28,24 @@ export class CPU extends React.Component {
             error: false,
             connected: false,
             data: {},
-            cpuMeta: {}
+            cpuMeta: {},
+            dataPoints: []
+            
         }
         this.aliasName = null;
+
+        this.dataPoint = {
+            x: 0,
+            y: 0
+        }
+        this.dataPoints = []
 
        
     }
     componentWillMount = () => {
         const { screenProps } = this.props
         this.aliasName = screenProps.aliasName
-        
+                
         
     }
     componentDidMount = () => {
@@ -73,6 +83,8 @@ export class CPU extends React.Component {
 
     render() {
         
+       
+
         
         if(this.props.screenProps.data !== null) {
             //cu = this.props.screenProps.data[this.aliasName].cpu.cu
@@ -94,7 +106,16 @@ export class CPU extends React.Component {
                 this.cpuInts = data.payload.cpu.ci
                 this.ctxSwitch = data.payload.cpu.cs
                 this.sysCalls = data.payload.cpu.sc
+                this.state.dataPoints.push(
+                    {
+                        x: this.dataPoint.x + 1,
+                        y: Math.floor((parseFloat(this.cu) / 100) * 5)
+                    }
+                )
+                this.dataPoint.x++
 
+                
+               
                 
                 
                 
@@ -106,13 +127,13 @@ export class CPU extends React.Component {
         
        
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <Header leftData={`cores: ${3}`}
                     rightData={this.state.cpuMeta.os_name}
                     mid={'CPU'}
                 />
                 
-                <ScrollView>
+                
                     <MenuItem title={'CPU USAGE'}
                         value={this.cu}
                         percent
@@ -140,10 +161,21 @@ export class CPU extends React.Component {
                         />
                     </View>
                     
+                        
+                        <VictoryChart animate={{ duration: 2000, easing: "bounce" }}>
+                            <VictoryLine
+                            style={{
+                            data: { stroke: "#c43a31" },
+                            parent: { border: "1px solid #ccc"}
+                            }}
+                            data={this.state.dataPoints}
+                        />
+                        </VictoryChart>
                     
-                </ScrollView>
+                    
                 
-            </View>
+                
+            </ScrollView>
         )
     }
 }

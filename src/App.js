@@ -95,7 +95,7 @@ class Root extends React.Component {
   }
 
   componentDidMount = () => {
-    this.ws = new WebSocket('ws://192.168.0.106:5000')
+    this.ws = new WebSocket('ws://192.168.0.104:5000')
     this.ws.onopen = this.onSocketOpen
     this.ws.onmessage = this.onmessage
 
@@ -106,10 +106,10 @@ class Root extends React.Component {
 
   onSocketOpen = e => {
    
-    setInterval(() => {
-      console.log('sending', this.ws)
-      this.ws.send(`{"destination" : "${this.aliasName}"}`)
-    }, 1000)
+    this.ws.send(`{"destination" : "${this.aliasName}"}`)
+    setTimeout(() => {
+      this.onSocketOpen()
+    }, 700)
   
   }
 
@@ -133,10 +133,10 @@ class Root extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      
         
         <Profiler screenProps={{data: JSON.parse(this.state.data), aliasName: this.aliasName}} />
-      </View>
+      
 
     )
   }

@@ -106,7 +106,6 @@ export class Menu extends React.Component {
                     {menuView}
                     
                     
-                    
                 </ScrollView>
 
             </View>
