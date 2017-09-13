@@ -95,7 +95,7 @@ class Root extends React.Component {
   }
 
   componentDidMount = () => {
-    this.ws = new WebSocket('ws://192.168.0.103:5000')
+    this.ws = new WebSocket('ws://10.20.30.155:4000/')
     this.ws.onopen = this.onSocketOpen
     this.ws.onmessage = this.onmessage
 
@@ -121,7 +121,7 @@ class Root extends React.Component {
 
     })
 
-    console.log(e.data)
+    
   }
 
 

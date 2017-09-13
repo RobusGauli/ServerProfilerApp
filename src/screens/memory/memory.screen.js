@@ -69,24 +69,7 @@ export class Memory extends React.Component {
                     mid={'Memory'}
                 />
 
-                <VictoryChart
-                theme={VictoryTheme.material}
-                animate={{ duration: 1000 }}
-              >
-                <VictoryStack
-                  colorScale={"blue"}
-                >
-                  {this.availables.map((data, i) => {
-                    return (
-                      <VictoryArea
-                        key={i}
-                        data={[{x: i+ 1, y: 3}, {x: i + 2, y: 10}]}
-                        interpolation={"basis"}
-                      />
-                    );
-                  })}
-                </VictoryStack>
-              </VictoryChart>
+                
                 <ScrollView>
                     <MenuItem title={'TOTAL '}
                         value={this.total}
